@@ -1,0 +1,13 @@
+ h2 {
+    color: chartreuse;
+ }
+
+ .game-price{
+   color: chocolate;
+ }
+
+ li{
+   /* display: inline-block; */
+   list-style: none;
+   margin-left: 20px;
+ }
