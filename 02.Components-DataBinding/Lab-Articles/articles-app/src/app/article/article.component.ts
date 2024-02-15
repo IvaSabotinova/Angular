@@ -22,15 +22,23 @@ export class ArticleComponent {
     this.descToShow = '';
   }
 
-  readMore() {
-    throw new Error('Method not implemented.');
+  readMore(): void {
+    this.articleDescLen += this.symbols;
+    this.descToShow = this.articleDesc.substring(0, this.articleDescLen);
+    if (this.articleDescLen >= this.articleDesc.length) {
+      this.showReadMoreBtn = false;
+      this.showHideBtn = true;
+    }
   }
 
   hideDesc() {
-    throw new Error('Method not implemented.');
+    this.articleDescLen = 0;
+    this.showReadMoreBtn = true;
+    this.showHideBtn = false;
+
   }
 
-  ToggleImage() {
+  ToggleImage(): void {
     this.imageIsShown = !this.imageIsShown;
     this.imageButtonTitle = this.imageIsShown ? 'Hide Image' : 'Show Image';
 

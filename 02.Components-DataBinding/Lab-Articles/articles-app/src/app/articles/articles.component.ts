@@ -14,7 +14,6 @@ export class ArticlesComponent implements OnInit {
 
   ngOnInit(): void {
     this.articles = new ArticleData().getData();
-
   }
 
 }
