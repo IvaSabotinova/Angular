@@ -7,7 +7,7 @@
  }
 
  li{
-   /* display: inline-block; */
+   display: inline-block;
    list-style: none;
    margin-left: 20px;
  }

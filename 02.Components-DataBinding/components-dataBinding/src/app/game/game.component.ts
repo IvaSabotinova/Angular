@@ -1,10 +1,7 @@
 import { Component } from "@angular/core";
+import { Game } from "./game-item/game-item.component";
 
-interface Game {
-    title?: string,
-    price: number,
-    img: string
-}
+
 
 @Component({
     selector: 'su-game',
@@ -14,6 +11,9 @@ interface Game {
 
 export class GameComponent {
     shouldPriceBeChocolate: boolean;
+    priceTextColor = 'red';
+    searchText: string = 'Game';
+    shouldShowGameItemComponent: boolean;
     games: Game[] = [
         { title: 'Minecraft', price: 10, img: 'https://image.api.playstation.com/vulcan/ap/rnd/202207/1517/nHNEJjVSCYL7CCblJgybzatE.png' },
         { title: 'Candy Crush', price: 0, img: 'https://media.pocketgamer.com/artwork/na-wfertn/candy_crush_saga_5th_birthday_app_icon.png' },
@@ -27,12 +27,25 @@ export class GameComponent {
         }
     }
 
+    handleSearchChange(event: Event): void {
+        console.log(event);
+
+    }
+
     handleExpandContentClick(gamesContainer: HTMLElement): void {
         //alert('Expand Clicked');
         //this.shouldPriceBeChocolate = this.shouldPriceBeChocolate ? false : true;
         this.shouldPriceBeChocolate = !this.shouldPriceBeChocolate;
-
         console.log(gamesContainer.children);
+        if (this.shouldPriceBeChocolate) {
+            this.priceTextColor = "chocolate"
+        } else {
+            this.priceTextColor = "black";
+        }
 
+    }
+
+    handleCreateDestroyGameItem(): void{
+        this.shouldShowGameItemComponent = !this.shouldShowGameItemComponent;
     }
 }

@@ -1,0 +1,13 @@
+<div #title>
+    Game: {{sourceGame.title}}
+</div> 
+<!-- <span [style.font-size]="'25px'" [style.color]="'red'" *ngIf="game.price > 50"> -->
+<!-- <span [style.font-size.px]="'25'" [style.color]="'red'" *ngIf="game.price > 50"> -->
+<!-- <span class="game-price" [style.font-size.px]="'25'" *ngIf="game.price > 50"> -->
+<!-- <span [class.game-price]="shouldPriceBeChocolate" [style.font-size.px]="'25'" *ngIf="game.price > 50"> -->
+  <div style="color: red;" [style.font-size.px]="'25'" *ngIf="sourceGame.price > 50">
+    Price: {{sourceGame.price}}
+</div>
+<div>
+    <img [attr.src]="sourceGame.img" [alt]="sourceGame.title + '\'s image'" width="70px" height="70px">
+</div> 
