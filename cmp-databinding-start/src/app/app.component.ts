@@ -9,6 +9,9 @@ export class AppComponent {
   serverElements = [{ type: 'server', name: 'Test01 server', content: 'Test01 content' },
   { type: 'blueprint', name: 'Test02 server', content: 'Test02 content' }];
 
+  oddNumbers: number[] = [];
+  evenNumbers: number[] = [];
+
   onServerAdded(serverData: { type: string, serverName: string, serverContent: string }) {
     this.serverElements.push({
       type: 'server',
@@ -32,7 +35,16 @@ export class AppComponent {
   }
 
   OnDestroyFirst() {
-    this.serverElements.splice(0,1);
+    this.serverElements.splice(0, 1);
+  }
+
+  emittedNumber(number: number) {
+    if (number % 2 === 0) {
+      this.evenNumbers.push(number);     
+    }
+    else {
+      this.oddNumbers.push(number);     
+    }
   }
 
 }
