@@ -1,13 +1,27 @@
 <div class="container">
   <div class="row">
     <div class="col-xs-12 col-md-8 col-md-offset-2">
+      <app-active-users>
+      </app-active-users>
+      <!-- [users]="activeUsers" -->
+      <!-- (userSetToInactive)="onSetToInactive($event)" -->
+      <app-inactive-users>
+      </app-inactive-users>
+      <!-- [users]="inactiveUsers" -->
+      <!-- (userSetToActive)="onSetToActive($event)" -->
+    </div>
+  </div>
+</div>
+
+<!-------------------------------------------------------->
+
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12 col-md-8 col-md-offset-2">
       <app-new-account></app-new-account>
       <!-- (accountAdded)="onAccountAdded($event)" -->
       <hr>
-      <app-account *ngFor="let acc of accounts; let i = index" 
-      [account]="acc" 
-      [id]="i"
-      ></app-account>
+      <app-account *ngFor="let acc of accounts; let i = index" [account]="acc" [id]="i"></app-account>
       <!-- (statusChanged)="onStatusChanged($event)" -->
     </div>
   </div>
