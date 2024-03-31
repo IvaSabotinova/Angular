@@ -8,7 +8,8 @@
                 </div>
                 <div class="col-sm-2 form-group">
                     <label for="amount">Amount</label>
-                    <input type="number" name="" id="amount" class="form-control" #amountInput>
+                    <input type="number" name="" id="amount" class="form-control"
+                    (input)="confirmedPriceInput($event)" #amountInput>
                 </div>
             </div>
             <div class="row">

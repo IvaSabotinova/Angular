@@ -21,4 +21,18 @@ export class ShoppingEditComponent implements OnInit {
     this.shoppingListService.addIngredient(
       new Ingredient(this.nameInput.nativeElement.value, this.amountInput.nativeElement.value));
   }
+
+  confirmedPriceInput(event: Event) {
+    const inputElement = event.target as HTMLInputElement;
+    const inputValue = inputElement.value;
+
+    const decimalIndex = inputValue.indexOf('.');
+    if (decimalIndex !== -1) {
+
+      const decimalPart = inputValue.substring(decimalIndex + 1);
+      if (decimalPart.length >= 3) {
+        inputElement.value = inputValue.substring(0, decimalIndex + 4);
+      }
+    }
+  }
 }
