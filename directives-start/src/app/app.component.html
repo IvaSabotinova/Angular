@@ -29,7 +29,7 @@
             [ngStyle]="{backgroundColor: even % 2 !== 0 ? 'yellow': 'transparent'}" *ngFor="let even of evenNumbers">
             {{even}}
           </li>
-        </div>
+        </div>      
       </ul>
       <p appBasicHighLight>Style me with basic directive!</p>
       <p [appBetterHighlight]="'red'" defaultColor="yellow">Style me with better directive!</p>

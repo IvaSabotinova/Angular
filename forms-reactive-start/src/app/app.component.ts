@@ -12,14 +12,35 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.form = new FormGroup({
-      'username': new FormControl(null, Validators.required),
-      'email': new FormControl(null, [Validators.required, Validators.email]),
+      'userData': new FormGroup({
+        'username': new FormControl(null, Validators.required),
+        'email': new FormControl(null, [Validators.required, Validators.email])
+      }),
       'gender': new FormControl('male'),
-    })    
+      'number': new FormControl(null)
+    })
   }
 
   onSubmit() {
     console.log(this.form);
+  }
+
+  onInput(event) {
+    let value = event.target.value;
+    console.log(parseFloat(value));
+    
+    if (typeof value === 'string') {
+      if (value.indexOf('лв') != -1) { 
+          value = value.replace('лв', '').trim();
+      } 
+
+      value = Number(value.replace(/ /g, ''));
+    }
+    
+    value = value;
+  console.log(value);
+  
+    
     
     }
 }
