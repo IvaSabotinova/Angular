@@ -35,11 +35,8 @@ export class ProductsComponent implements OnInit, OnDestroy {
 
     onAddProduct(form: NgForm) {
         if (form.valid) {
-            console.log(form);
             //  this.products.push(form.value.productName);
             this.productService.addProduct(form.value.productName);
-            console.log(this.products);
-
         }
     }
 
