@@ -1,0 +1,15 @@
+<h1>Hi, I am products component!</h1>
+<form (ngSubmit)="onAddProduct(f)" #f="ngForm">
+    <input type="text" ngModel name="productName" style="margin-bottom: 5px;" required>
+    <br>
+    <button type="submit">Add Product</button>
+</form>
+
+<!-- <input *ngIf="!isDisabled" type="text" [(ngModel)]="productName" style="margin-bottom: 5px;">
+<br>
+<button *ngIf="!isDisabled" (click)="productName='An apple'" [disabled]="isDisabled">Change Name</button> -->
+<app-product 
+*ngFor="let product of products" 
+[productName]="product">
+</app-product>
+<!-- (productClicked)="onRemoveProduct(product)" -->
