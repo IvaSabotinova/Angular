@@ -2,4 +2,28 @@
     <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="home">Home</mat-icon>Click me!
 </button> -->
 
-<router-outlet></router-outlet>
+<mat-sidenav-container>
+    <mat-sidenav #sideNav role="navigation">
+        <p>I'm the sidenav!</p>
+    </mat-sidenav>
+    <mat-sidenav-content>
+        <mat-toolbar color="primary">
+            <div><button mat-icon-button (click)="sideNav.toggle()">
+                <mat-icon>menu</mat-icon>
+            </button></div>
+            <div><a routerLink="/">LOGO</a></div>
+            <!-- <div fxFlex></div> -->
+            <div fxFlex fxLayout="row" fxLayoutAlign="flex-end">                
+                <ul flFlex fxLayout fxLayoutGap="10px" class="navigation-items">
+                    <li><a routerLink="/signup">Signup</a></li>
+                    <li><a routerLink="login">Login</a></li>
+                    <li><a routerLink="training">Training</a></li>
+                </ul>         
+            </div>
+        </mat-toolbar>
+        <!-- <button (click)="sideNav.toggle()">Show Sidenav</button>  -->
+        <main>
+            <router-outlet></router-outlet>
+        </main>
+     </mat-sidenav-content>
+</mat-sidenav-container> 
