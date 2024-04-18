@@ -28,6 +28,7 @@ export class CurrentTrainingComponent implements OnInit {
   }
 
   stopProgress() {
+    debugger;
     clearInterval(this.timer)
     const dialogRef = this.dialog.open(StopTrainingComponent, {
       data: {
