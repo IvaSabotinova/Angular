@@ -1,7 +1,8 @@
 import { Observable, Subject } from 'rxjs';
-import { addDoc, collection, doc, setDoc } from 'firebase/firestore';
-import { collectionData, collectionSnapshots, Firestore } from '@angular/fire/firestore';
 import { inject, Injectable } from '@angular/core';
+import { addDoc, collection } from 'firebase/firestore';
+import { collectionData, Firestore } from '@angular/fire/firestore';
+import { Timestamp } from '@angular/fire/firestore';
 
 import { Exercise } from './exercise.model';
 
@@ -13,29 +14,25 @@ export class TrainingService {
     // { id: 'side-lunges', name: 'Side Lunges', duration: 120, calories: 18 },
     // { id: 'burpees', name: 'Burpees', duration: 60, calories: 8 }
     //];
+    availableExercisesChange = new Subject<Exercise[]>();
     private runningExercise: Exercise;
-    exerciseChanged = new Subject<Exercise>();
-    exercisesChanged = new Subject<Exercise[]>();
-    private exercises: Exercise[] = [];
+    runningExerciseChange = new Subject<Exercise>();
+    pastExercisesChange = new Subject<Exercise[]>();
     private db: Firestore = inject(Firestore);
-    exercises$: Observable<Exercise[]>;
-
 
     fetchAvailableExercises() {
         //return this.availableExercises.slice();
         const exercisesCollection = collection(this.db, 'AvailableExercises'); // get a reference to the AvailableExercises collection    
-        this.exercises$ = collectionData(exercisesCollection) as Observable<Exercise[]>; // get documents (data) from the collection
-        this.exercises$.subscribe((result) => {
+        const exercises$ = collectionData(exercisesCollection) as Observable<Exercise[]>; // get documents (data) from the collection
+        exercises$.subscribe((result) => {
             this.availableExercises = result;
-            console.log(result);
-            
-            this.exercisesChanged.next([...this.availableExercises]);
+            this.availableExercisesChange.next([...this.availableExercises]);
         });
     }
 
     startExercise(selectedId: string) {
         this.runningExercise = this.availableExercises.find(ex => ex.id === selectedId);
-        this.exerciseChanged.next({ ...this.runningExercise });
+        this.runningExerciseChange.next({ ...this.runningExercise });
     }
 
     getRunningExercise() {
@@ -43,20 +40,12 @@ export class TrainingService {
     }
 
     completeExercise() {
-       // this.exercises.push({ ...this.runningExercise, date: new Date(), state: 'completed' });
         this.addDataToDatabase({ ...this.runningExercise, date: new Date(), state: 'completed' });
         this.runningExercise = null;
-        this.exerciseChanged.next(null);
+        this.runningExerciseChange.next(null);
     }
 
     cancelExercise(progress: number) {
-        // this.exercises.push({
-        //     ...this.runningExercise,
-        //     duration: this.runningExercise.duration * (progress / 100),
-        //     calories: this.runningExercise.calories * (progress / 100),
-        //     date: new Date(),
-        //     state: 'cancelled'
-        // });
         this.addDataToDatabase({
             ...this.runningExercise,
             duration: this.runningExercise.duration * (progress / 100),
@@ -65,17 +54,25 @@ export class TrainingService {
             state: 'cancelled'
         });
         this.runningExercise = null;
-        this.exerciseChanged.next(null);
+        this.runningExerciseChange.next(null);
     }
 
-    getCompletedOrCancelledExercises() {
-        return this.exercises.slice();
+    fetchCompletedOrCancelledExercises() {
+        const finishedExercises = collection(this.db, 'FinishedExercises');
+        const exercises$ = collectionData(finishedExercises) as Observable<any>;
+
+        exercises$.subscribe((result) => {
+            result.forEach(x => {
+                const jsDate = (x.date as Timestamp).toDate();
+                x.date = jsDate;
+            });
+            this.pastExercisesChange.next(result);
+        });
     }
 
-    private addDataToDatabase(exercise: Exercise){        
+    private addDataToDatabase(exercise: Exercise) {
         const collectionRef = collection(this.db, 'FinishedExercises');
-
-        // Add documents to the new collection
-         addDoc(collectionRef, exercise);         
+        // Add documents to the collection
+        addDoc(collectionRef, exercise);
     }
 }

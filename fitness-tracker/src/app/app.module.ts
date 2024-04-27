@@ -6,6 +6,8 @@ import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
 import { FirestoreModule, getFirestore, provideFirestore } from '@angular/fire/firestore';
+import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+import { getAuth, provideAuth } from '@angular/fire/auth';
 
 
 import { AuthService } from './auth/auth.service';
@@ -51,7 +53,9 @@ import { environment } from '../environments/environment';
     FirestoreModule,
     AngularFireModule,
     // AngularFireModule.initializeApp(environment.firebase),
-    AngularFirestoreModule
+    AngularFirestoreModule,
+    AngularFireAuthModule,
+    provideAuth(() => getAuth())
   ],
   providers: [AuthService, TrainingService],
   bootstrap: [AppComponent],
