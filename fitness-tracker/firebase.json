@@ -1,9 +1,0 @@
-{
-  "hosting": [
-    {
-      "target": "fitness-tracker",
-      "source": ".",
-      "frameworksBackend": {}
-    }
-  ]
-}
