@@ -1,25 +1,44 @@
 import { Subject } from "rxjs";
 import { Injectable, inject } from "@angular/core";
 import { Router } from "@angular/router";
-import { Auth } from '@angular/fire/auth';
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import { Auth, authState } from '@angular/fire/auth';
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "firebase/auth";
 
 import { AuthData } from "./auth-data.model";
+import { TrainingService } from "../training/training.service";
 
 @Injectable()
 export class AuthService {
     authChange = new Subject<boolean>();
     private isAuthenticated = false;
 
-    constructor(private router: Router, private auth: Auth = inject(Auth)) { }
+    constructor(
+        private router: Router,
+        private auth: Auth = inject(Auth),
+        private trainingService: TrainingService
+    ) { }
 
-    registerUser(authData: AuthData) {        
-        const auth = getAuth();
-        createUserWithEmailAndPassword(auth, authData.email, authData.password)
+    initAuthListener() {
+        authState(this.auth).subscribe(user => {
+            if (user) {
+                this.isAuthenticated = true;
+                this.authChange.next(true);
+                this.router.navigate(['/training'])
+            } else {
+                this.trainingService.cancelFbSubscriptions();
+                this.authChange.next(false);
+                this.router.navigate(['/login']);
+                this.isAuthenticated = false;
+            }
+        })
+    }
+
+    registerUser(authData: AuthData) {
+        this.auth = getAuth();
+        createUserWithEmailAndPassword(this.auth, authData.email, authData.password)
             .then((userCredential) => {
                 const user = userCredential.user;
                 console.log(user);
-                this.authSuccessfully();
             })
             .catch((error) => {
                 const errorCode = error.code;
@@ -28,34 +47,26 @@ export class AuthService {
             });
     }
 
-    loginUser(authData: AuthData) {       
-        const auth = getAuth();
-        signInWithEmailAndPassword(auth, authData.email, authData.password)
+    loginUser(authData: AuthData) {
+        this.auth = getAuth();
+        signInWithEmailAndPassword(this.auth, authData.email, authData.password)
             .then((userCredential) => {
                 const user = userCredential.user;
-                console.log(user);                
-                this.authSuccessfully();
+                console.log(user);
             })
             .catch((error) => {
                 const errorCode = error.code;
                 const errorMessage = error.message;
-                console.log(errorMessage);                
+                console.log(errorMessage);
             });
     }
 
     logoutUser() {
-        this.authChange.next(false);
-        this.router.navigate(['/login']);
-        this.isAuthenticated = false;
+        this.auth = getAuth();
+        signOut(this.auth);
     }
 
     isAuth() {
         return this.isAuthenticated;
-    }
-
-    private authSuccessfully() {
-        this.isAuthenticated = true;
-        this.authChange.next(true);
-        this.router.navigate(['/training']);
     }
 }

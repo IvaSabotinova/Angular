@@ -13,6 +13,6 @@ export class AuthGuard {
     canActivate(): MaybeAsync<GuardResult> {
         if (!this.authService.isAuth()) {
             return this.router.navigate(['/login'])
-        }        
+        }     
     }
 }
