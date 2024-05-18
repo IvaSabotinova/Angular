@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ContentService } from '../content.service';
 import { ITheme } from '../shared/interfaces';
 import { tap } from 'rxjs';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-theme',
@@ -18,6 +19,4 @@ export class ThemeComponent implements OnInit {
       this.themes = result.sort((a, b) => b.subscribers.length - a.subscribers.length)
     })).subscribe();
   }
-
-
 }
