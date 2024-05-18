@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, filter, map } from 'rxjs';
 
 export interface ICustomer {
   id: number;
@@ -56,7 +56,11 @@ export class CustomerService {
   }
 
   getPostsByCustomerId$(id: number): Observable<IPost[]> {
-  	return this.httpClient.get<IPost[]>('https://jsonplaceholder.typicode.com/users/' + id + '/posts')
+    return this.httpClient.get<IPost[]>('https://jsonplaceholder.typicode.com/users/' + id + '/posts')
+    // return this.httpClient.get<IPost[]>('https://jsonplaceholder.typicode.com/posts')
+    //   .pipe(
+    //     map(posts => posts.filter(p => p.userId === id))   
+    //   )
   }
 
   getAlbumsByCustomerId$(id: number): Observable<IAlbum[]> {

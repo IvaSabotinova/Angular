@@ -10,13 +10,16 @@ import { HomeComponent } from './pages/home/home.component';
 import { AboutComponent } from './pages/about/about.component';
 import { CoreModule } from './core/core.module';
 import { DefaultViewComponent } from './pages/default-view/default-view.component';
+import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     AboutComponent,
-    DefaultViewComponent
+    DefaultViewComponent,
+    PageNotFoundComponent
   ],
   imports: [
     BrowserModule,
@@ -25,7 +28,9 @@ import { DefaultViewComponent } from './pages/default-view/default-view.componen
     CoreModule,
     CustomerModule    
   ],
-  providers: [],
+  providers: [
+    provideAnimationsAsync()
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

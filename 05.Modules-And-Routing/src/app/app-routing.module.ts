@@ -7,6 +7,9 @@ import { CustomerProfileComponent } from './customer/customer-profile/customer-p
 import { CustomerProfilePostsComponent } from './customer/customer-profile-posts/customer-profile-posts.component';
 import { CustomerProfileAlbumsComponent } from './customer/customer-profile-albums/customer-profile-albums.component';
 import { DefaultViewComponent } from './pages/default-view/default-view.component';
+import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
+import { customerPostsResolver } from './customer/customer-posts.resolver';
+import { profileGuard } from './guards/profile.guard';
 
 const routes: Routes = [
   {
@@ -33,10 +36,12 @@ const routes: Routes = [
   },
   {
     path: 'customer/:id',
-    component: CustomerProfileComponent,
+    //canActivate: [profileGuard],
+    component: CustomerProfileComponent,   
     children: [
       {
         path: 'posts',
+        resolve: { posts: customerPostsResolver},
         component: CustomerProfilePostsComponent
       },
       {
@@ -44,6 +49,10 @@ const routes: Routes = [
         component: CustomerProfileAlbumsComponent
       }
     ]
+  },
+  {
+    path: '**',
+    component: PageNotFoundComponent
   }
 
 ];

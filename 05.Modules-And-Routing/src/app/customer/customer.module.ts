@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 import { CustomerListComponent } from './customer-list/customer-list.component';
 import { CustomerListItemComponent } from './customer-list-item/customer-list-item.component';
@@ -20,7 +21,8 @@ import { CustomerProfilePostsComponent } from './customer-profile-posts/customer
   ],
   imports: [
     CommonModule,
-    RouterModule
+    RouterModule, 
+    MatProgressSpinnerModule
   ],
   exports: [
     CustomerListComponent

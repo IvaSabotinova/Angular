@@ -6,7 +6,6 @@
         <p>Name: {{customer.name}}</p>
         <p>Phone: {{customer.phone}}</p>
         <p>Email: {{customer.email}}</p>
-
         <ul>
             <li><a [routerLink]="['/customer', customer.id, 'posts']">Posts</a></li>
             <li><a [routerLink]="['/customer', customer.id, 'albums']">Albums</a></li>
@@ -17,5 +16,5 @@
 <router-outlet></router-outlet>
 
 <ng-template #loadingIndicator>
-    Loading...
+    Loading... <mat-spinner></mat-spinner>
 </ng-template>

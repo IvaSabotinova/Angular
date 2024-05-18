@@ -13,14 +13,16 @@ export class CustomerProfilePostsComponent implements OnInit {
   constructor(private customerService: CustomerService, private activatedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {    
-    const id = this.activatedRoute.parent!.snapshot.paramMap.get('id');
-    this.customerService.getPostsByCustomerId$(Number(id))
-      .subscribe(posts => {
+    // const id = this.activatedRoute.parent!.snapshot.paramMap.get('id');
+    // this.customerService.getPostsByCustomerId$(Number(id))
+    //   .subscribe(posts => {
         
-        this.posts = posts;
-      })
+    //     this.posts = posts;
+    //   })
 
+    this.activatedRoute.data.subscribe(data=>{
+      this.posts = data['posts']
+      
+    })
   }
-
-
 }
