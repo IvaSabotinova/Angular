@@ -1,18 +1,22 @@
-
 <header>
     <div class="mini-navbar-wrap">
         <div class="logo-wrap">
             <p class="logo"><span class="logo">SoftUni Forum</span></p>
         </div>
-        <div class="mini-navbar">
+        <div class="mini-navbar" *ngIf="!isLogged">
             <ul>
                 <li>
-                    <a href="#">Login</a>
+                    <a href="#" (click)="LoginHandler()">Login</a>
                 </li>
                 <li>
                     <a href="#">Register</a>
                 </li>
             </ul>
+        </div>
+
+        <div class="mini-navbar" *ngIf="isLogged">
+            <div>HELLO, [username]&#64;localdomain.com</div>
+            <button class="logout" (click)="LogoutHandler()">Logout</button>
         </div>
     </div>
     <nav>

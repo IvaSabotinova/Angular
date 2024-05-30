@@ -71,3 +71,10 @@ nav {
     border-left: 1px solid lightgrey;
     padding-left: .5em;
 }
+
+.logout {
+    padding: 0px 5px;
+    background-color: #6ba1b8;
+    border-radius: 5px;
+    border: 1px solid lightgrey;
+}
