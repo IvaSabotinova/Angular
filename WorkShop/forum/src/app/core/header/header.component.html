@@ -15,8 +15,16 @@
         </div>
 
         <div class="mini-navbar" *ngIf="isLogged">
-            <div>HELLO, [username]&#64;localdomain.com</div>
-            <button class="logout" (click)="LogoutHandler()">Logout</button>
+            <!-- <div>HELLO, [username]&#64;localdomain.com</div>
+            <button class="logout" (click)="LogoutHandler()">Logout</button> -->
+            <ul>
+                <li>
+                    <a href="#">John's Profile</a>
+                </li>
+                <li>
+                    <a href="#" (click)="LogoutHandler()">Logout</a>
+                </li>
+            </ul>
         </div>
     </div>
     <nav>

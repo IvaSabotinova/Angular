@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ThemeService } from '../theme.service';
-import { ITheme } from '../interfaces';
+import { ThemeService } from '../../../core/theme.service';
+import { ITheme } from '../../../core/interfaces';
 import { tap } from 'rxjs';
 
 @Component({
