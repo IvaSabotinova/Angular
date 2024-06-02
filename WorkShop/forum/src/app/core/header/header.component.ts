@@ -15,9 +15,9 @@ export class HeaderComponent {
 
   constructor(private userService: UserService) { }
 
-  LoginHandler() {
-    this.userService.login();
-  }
+  // LoginHandler() {
+  //   this.userService.login();
+  // }
   
   LogoutHandler() {
     this.userService.logout();

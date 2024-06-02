@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { ModuleWithProviders, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { HeaderComponent } from './header/header.component';
@@ -7,6 +7,7 @@ import { PostService } from './post.service';
 import { storageServiceProvider } from './storage.service';
 import { ThemeService } from './theme.service';
 import { UserService } from './user.service';
+import { RouterModule } from '@angular/router';
 
 
 @NgModule({
@@ -15,23 +16,29 @@ import { UserService } from './user.service';
     FooterComponent
   ],
   imports: [
-    CommonModule
-  ], 
+    CommonModule,
+    RouterModule
+  ],
   exports: [
     HeaderComponent,
     FooterComponent
   ],
-  providers: [
-    UserService,
-    storageServiceProvider,
-    ThemeService, 
-    //PostService,
-    {
-      provide: PostService,
-      useClass: PostService
-    }
-  ]
-
-  
+  providers: []
 })
-export class CoreModule { }
+export class CoreModule {
+  static forRoot(): ModuleWithProviders<CoreModule>{
+    return {
+      ngModule: CoreModule,
+      providers: [
+        UserService,
+        storageServiceProvider,
+        ThemeService,
+        //PostService,
+        {
+          provide: PostService,
+          useClass: PostService
+        }
+      ]
+    }
+  }
+}

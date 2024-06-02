@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { WelcomeComponent } from './welcome/welcome.component';
+import { RouterModule } from '@angular/router';
+import { AuthRoutingModule } from '../auth/auth-routing.module';
 
 
 
@@ -9,7 +11,10 @@ import { WelcomeComponent } from './welcome/welcome.component';
     WelcomeComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,  
+  ], 
+  exports: [
+    WelcomeComponent
   ]
 })
 export class SharedModule { }

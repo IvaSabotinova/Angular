@@ -7,6 +7,8 @@ import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
 import { ThemesModule } from './feature/themes/themes.module';
 import { RouterModule } from '@angular/router';
+import { PagesModule } from './feature/pages/pages.module';
+import { AuthModule } from './auth/auth.module';
 
 @NgModule({
   declarations: [
@@ -16,9 +18,11 @@ import { RouterModule } from '@angular/router';
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
-    CoreModule,
-    RouterModule
-   // ThemesModule
+    CoreModule.forRoot(),
+    RouterModule,
+    PagesModule,
+    AuthModule,
+    ThemesModule
   ],
   providers: [],
   bootstrap: [AppComponent]
