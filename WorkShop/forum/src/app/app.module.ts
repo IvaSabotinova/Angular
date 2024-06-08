@@ -1,14 +1,14 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
+import { RouterModule } from '@angular/router';
 
-import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
-import { ThemesModule } from './feature/themes/themes.module';
-import { RouterModule } from '@angular/router';
-import { PagesModule } from './feature/pages/pages.module';
 import { AuthModule } from './auth/auth.module';
+import { AppRoutingModule } from './app-routing.module';
+import { ThemesModule } from './feature/themes/themes.module';
+import { PagesModule } from './feature/pages/pages.module';
 
 @NgModule({
   declarations: [
@@ -17,12 +17,12 @@ import { AuthModule } from './auth/auth.module';
   imports: [
     BrowserModule,
     HttpClientModule,
-    AppRoutingModule,
-    CoreModule.forRoot(),
     RouterModule,
+    CoreModule.forRoot(),
     PagesModule,
     AuthModule,
-    ThemesModule
+    ThemesModule,
+    AppRoutingModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

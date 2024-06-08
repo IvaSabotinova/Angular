@@ -1,21 +1,26 @@
-    <!-- theme component  -->
-    <div class="theme-title">
-<div class="theme-name-wrapper">
-    <div class="theme-name">
-        <a href="#" class="normal">
-            <h2>{{ themeItem.themeName}}</h2>
-        </a>
-        <div class="columns">
-            <div>
-                <p>Date: <time>{{themeItem.created_at | date}}</time></p>
-                <div class="nick-name">
-                    <p>Username: <span>{{themeItem.userId.username}}</span></p>
+<!-- theme component  -->
+<div class="theme-title">
+    <div class="theme-name-wrapper">
+        <div class="theme-name">
+            <a [routerLink]="['/themes', themeItem._id]" class="normal">
+                <h2>{{ themeItem.themeName}}</h2>
+            </a>
+            <div class="columns">
+                <div>
+                    <p>Date: <time>{{themeItem.created_at | date}}</time></p>
+                    <div class="nick-name">
+                        <p>Username: <span>{{themeItem.userId.username}}</span></p>
+                    </div>
                 </div>
-            </div>
-            <div class="subscribers">
-                <!-- <button class="subscribe">Subscribe</button> -->
-                <p>Subscribers: <span>{{themeItem.subscribers.length}}</span></p>
+                <div class="subscribers">
+                    <button *ngIf="isLoggedIn" 
+                    [class.subscribe]="canSubscribe" 
+                    [class.unsubscribe]="!canSubscribe"
+                    >                        
+                    {{ canSubscribe ? 'Subscribe' : 'Unsubscribe'}}
+                    </button>
+                    <p>Subscribers: <span>{{themeItem.subscribers.length}}</span></p>
+                </div>
             </div>
         </div>
     </div>
-</div> 

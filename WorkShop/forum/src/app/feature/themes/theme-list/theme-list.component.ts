@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ThemeService } from '../../../core/theme.service';
-import { ITheme } from '../../../core/interfaces';
 import { tap } from 'rxjs';
+
+import { ITheme } from '../../../core/interfaces';
+import { ThemeService } from '../../../core/theme.service';
 
 @Component({
   selector: 'app-theme-list',

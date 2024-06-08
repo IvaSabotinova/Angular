@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { ITheme } from './interfaces';
 import { HttpClient } from '@angular/common/http';
+
 import { environment } from '../../environments/environment';
+import { IPost, ITheme } from './interfaces';
 
 const apiUrl = environment.apiUrl;
 
@@ -15,5 +16,9 @@ export class ThemeService {
 
   getThemes$(): Observable<ITheme[]> {
     return this.httpClient.get<ITheme[]>(apiUrl + '/themes');
+  }
+
+  getThemeById$(themeId: string): Observable<ITheme<IPost>> {
+    return this.httpClient.get<ITheme<IPost>>(apiUrl + `/themes/${themeId}`);
   }
 }
