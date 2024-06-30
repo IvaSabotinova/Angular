@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { UserService } from '../../core/user.service';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { emailValidator } from '../util';
 
 @Component({
   selector: 'app-login',
@@ -10,11 +12,27 @@ import { UserService } from '../../core/user.service';
 })
 export class LoginComponent {
 
+  
+  loginFormGroup: FormGroup = this.fb.group({
+    email: new FormControl('', [Validators.required, emailValidator]),
+    password: new FormControl(null, [Validators.required, Validators.minLength(5)])
+  })
 
-  constructor(private userService: UserService, private router: Router) { }
-
-  LoginHandler() {
+  constructor(
+    private userService: UserService,
+    private router: Router,
+    private fb: FormBuilder
+  ) { }
+ 
+  handleLogin() {
     this.userService.login();
     this.router.navigate(['/home']);
+    console.log('form')
+  }
+
+  loginHandler() {
+    // this.userService.login();
+    // this.router.navigate(['/home']);
+    console.log('button')
   }
 }
