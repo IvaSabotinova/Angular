@@ -35,4 +35,12 @@ export class LoginComponent {
     // this.router.navigate(['/home']);
     console.log('button')
   }
+
+  isControlTouchedAndInvalid(controlName: string): boolean {
+    return this.loginFormGroup.controls[controlName].touched && this.loginFormGroup.controls[controlName].invalid;
+  }
+
+  showControlError(controlName: string, errorName: string): boolean {
+     return this.loginFormGroup.controls[controlName].errors?.[errorName]
+  }
 }

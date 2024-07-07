@@ -6,33 +6,40 @@
 
             <p class="field field-icon">
                 <label for="email"><span><i class="fas fa-envelope"></i></span></label>
-                <input formControlName="email" class="input-error" type="email" name="email" id="email"
-                    placeholder="john.doe@gmail.com">
+                <input formControlName="email" 
+                [class.input-error]="isControlTouchedAndInvalid('email')"
+                class="input-error" 
+                type="email" 
+                name="email" 
+                id="email"
+                placeholder="john.doe@gmail.com">
             </p>
 
-            <ng-container *ngIf="loginFormGroup.controls['email'].touched && loginFormGroup.controls['email'].invalid">
-                <p class="error" *ngIf="loginFormGroup.controls['email'].errors?.['required']">
+            <ng-container *ngIf="isControlTouchedAndInvalid('email')">
+                <p class="error" *ngIf="showControlError('email', 'required')">
                     Email is required!
                 </p>
 
                 <p class="error"
-                    *ngIf="!loginFormGroup.controls['email'].errors?.['required'] && loginFormGroup.controls['email'].errors?.['email']">
+                    *ngIf="!showControlError('email', 'required') && showControlError('email', 'email')">
                     Email is not valid!
                 </p>
             </ng-container>
 
             <p class="field field-icon">
                 <label for="password"><span><i class="fas fa-lock"></i></span></label>
-                <input formControlName="password" type="password" name="password" id="password" placeholder="******">
+                <input 
+                [class.input-error]="isControlTouchedAndInvalid('password')"
+                formControlName="password" type="password" name="password" id="password" placeholder="******">
             </p>
 
-            <ng-container *ngIf="loginFormGroup.controls['password'].touched && loginFormGroup.controls['password'].invalid">
-                <p class="error" *ngIf="loginFormGroup.controls['password'].errors?.['required']">
+            <ng-container *ngIf="isControlTouchedAndInvalid('password')">
+                <p class="error" *ngIf="showControlError('password', 'required')">
                    <!-- {{loginFormGroup.controls['password'].errors| json}} -->
                    Password is required! 
                 </p>
 
-                <p class="error" *ngIf="loginFormGroup.controls['password'].errors?.['minlength']">
+                <p class="error" *ngIf="showControlError('password', 'minlength')">
                     Password must be at least 5 characters!
                 </p>
             </ng-container>

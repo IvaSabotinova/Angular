@@ -73,13 +73,13 @@ form.login, form.register {
 
 /* errors  */
 
-p.error {
+.login p.error, .register p.error {
     text-align: left;
     border-radius: 0.3em;
     color: red;
     padding-top: 0;
 }
 
-.input-error {
+.login .input-error, .register .input-error {
     border-left-color: red;
 }
