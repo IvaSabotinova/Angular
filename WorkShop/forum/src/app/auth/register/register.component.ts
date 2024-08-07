@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { emailValidator, passwordMatch } from '../util';
+import { CreateUserDto, UserService } from '../../core/user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -28,16 +30,33 @@ export class RegisterComponent implements OnInit {
     }),
 
   })
-  constructor(private fb: FormBuilder) { }
-
-
+  constructor(
+    private fb: FormBuilder, 
+    private userService: UserService,
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
 
   }
 
   handleRegister() {
- 
+    const { username, email, passwords, tel, telRegion } = this.registerFormGroup.value;
+    
+    const data: CreateUserDto = {
+       username: username,
+       email: email,
+       password: passwords.password,
+       ...(tel && { tel: telRegion + tel })     
+    }
+    
+    // if (tel){
+    //   data.tel = telRegion + tel;
+    // }
+
+    this.userService.register$(data).subscribe(() => {
+      this.router.navigate(['/home'])
+    })
   }
 
   isControlTouchedAndInvalid(controlName: string, formGroup: FormGroup = this.registerFormGroup): boolean {
