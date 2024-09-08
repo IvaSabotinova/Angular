@@ -11,8 +11,8 @@ import { emailValidator } from '../util';
   styleUrl: './login.component.css'
 })
 export class LoginComponent {
+errorMessage: string = '';
 
-  
   loginFormGroup: FormGroup = this.fb.group({
     email: new FormControl('', [Validators.required, emailValidator]),
     password: new FormControl(null, [Validators.required, Validators.minLength(5)])
@@ -23,11 +23,21 @@ export class LoginComponent {
     private router: Router,
     private fb: FormBuilder
   ) { }
- 
+
   handleLogin() {
-    this.userService.login();
-    this.router.navigate(['/home']);
-    console.log('form')
+    this.errorMessage = '';
+    this.userService.login(this.loginFormGroup.value).subscribe({
+      next: user => {
+        console.log(user)
+        this.router.navigate(['/home']);
+      },
+      error: err => {
+        this.errorMessage = err.error.message;
+      },
+      complete: () => {
+        console.log('completed')
+      }
+    })
   }
 
   loginHandler() {
@@ -41,6 +51,6 @@ export class LoginComponent {
   }
 
   showControlError(controlName: string, errorName: string): boolean {
-     return this.loginFormGroup.controls[controlName].errors?.[errorName]
+    return this.loginFormGroup.controls[controlName].errors?.[errorName]
   }
 }

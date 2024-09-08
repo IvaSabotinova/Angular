@@ -19,7 +19,7 @@
             <button class="logout" (click)="LogoutHandler()">Logout</button> -->
             <ul>
                 <li>
-                    <a routerLink="/profile">John's Profile</a>
+                    <a routerLink="/profile">{{ currentUser.username }}'s Profile</a>
                 </li>
                 <li>
                     <a href="#" (click)="LogoutHandler()">Logout</a>

@@ -31,6 +31,7 @@ export const storageServiceProvider: Provider = {
  useFactory: storageFactory,
  deps:[PLATFORM_ID]
 }
+
 export class BrowserStorage {
   localStorage = localStorage;
 

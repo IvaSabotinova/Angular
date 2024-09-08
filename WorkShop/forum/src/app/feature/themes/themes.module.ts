@@ -10,6 +10,7 @@ import { ThemeListItemComponent } from './theme-list-item/theme-list-item.compon
 import { ThemesPageComponent } from './themes-page/themes-page.component';
 import { ThemesNewPageComponent } from './themes-new-page/themes-new-page.component';
 import { ThemeDetailsComponent } from './theme-details/theme-details.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { ThemeDetailsComponent } from './theme-details/theme-details.component';
   ],
   imports: [
     CommonModule,
+    FormsModule,
     SharedModule, 
     ThemesRoutingModule
   ],

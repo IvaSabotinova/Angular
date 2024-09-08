@@ -14,6 +14,10 @@ export class ThemeService {
 
   constructor(private httpClient: HttpClient) { }
 
+  addTheme$(newTheme: { themeName: string, postText: string }): Observable<ITheme> {
+    return this.httpClient.post<ITheme>(`${apiUrl}/themes`, newTheme, { withCredentials: true });
+  }
+
   getThemes$(): Observable<ITheme[]> {
     return this.httpClient.get<ITheme[]>(apiUrl + '/themes');
   }

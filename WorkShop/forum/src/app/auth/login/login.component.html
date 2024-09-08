@@ -4,15 +4,12 @@
         <fieldset>
             <h2>Login Form</h2>
 
+            <p *ngIf="errorMessage" class="error">{{errorMessage}}</p>
+
             <p class="field field-icon">
                 <label for="email"><span><i class="fas fa-envelope"></i></span></label>
-                <input formControlName="email" 
-                [class.input-error]="isControlTouchedAndInvalid('email')"
-                class="input-error" 
-                type="email" 
-                name="email" 
-                id="email"
-                placeholder="john.doe@gmail.com">
+                <input formControlName="email" [class.input-error]="isControlTouchedAndInvalid('email')"
+                    class="input-error" type="email" name="email" id="email" placeholder="john.doe@gmail.com">
             </p>
 
             <ng-container *ngIf="isControlTouchedAndInvalid('email')">
@@ -20,23 +17,21 @@
                     Email is required!
                 </p>
 
-                <p class="error"
-                    *ngIf="!showControlError('email', 'required') && showControlError('email', 'email')">
+                <p class="error" *ngIf="!showControlError('email', 'required') && showControlError('email', 'email')">
                     Email is not valid!
                 </p>
             </ng-container>
 
             <p class="field field-icon">
                 <label for="password"><span><i class="fas fa-lock"></i></span></label>
-                <input 
-                [class.input-error]="isControlTouchedAndInvalid('password')"
-                formControlName="password" type="password" name="password" id="password" placeholder="******">
+                <input [class.input-error]="isControlTouchedAndInvalid('password')" formControlName="password"
+                    type="password" name="password" id="password" placeholder="******">
             </p>
 
             <ng-container *ngIf="isControlTouchedAndInvalid('password')">
                 <p class="error" *ngIf="showControlError('password', 'required')">
-                   <!-- {{loginFormGroup.controls['password'].errors| json}} -->
-                   Password is required! 
+                    <!-- {{loginFormGroup.controls['password'].errors| json}} -->
+                    Password is required!
                 </p>
 
                 <p class="error" *ngIf="showControlError('password', 'minlength')">
