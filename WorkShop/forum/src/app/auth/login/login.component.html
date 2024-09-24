@@ -1,6 +1,5 @@
-<div [formGroup]="loginFormGroup" class="container" (ngSubmit)="handleLogin()">
-    <form class="login" action="" method="post">
-
+<!-- <div [formGroup]="loginFormGroup" class="container" (ngSubmit)="handleLogin()"> -->
+    <form class="login" action="" method="post" [formGroup]="loginFormGroup" (ngSubmit)="handleLogin()">
         <fieldset>
             <h2>Login Form</h2>
 
@@ -48,4 +47,4 @@
 
         </fieldset>
     </form>
-</div>
+<!-- </div> -->
