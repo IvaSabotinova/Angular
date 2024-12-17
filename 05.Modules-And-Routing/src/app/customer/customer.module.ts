@@ -8,6 +8,7 @@ import { CustomerListItemComponent } from './customer-list-item/customer-list-it
 import { CustomerProfileComponent } from './customer-profile/customer-profile.component';
 import { CustomerProfileAlbumsComponent } from './customer-profile-albums/customer-profile-albums.component';
 import { CustomerProfilePostsComponent } from './customer-profile-posts/customer-profile-posts.component';
+import { SharedModule } from '../shared/shared.module';
 
 
 
@@ -22,7 +23,8 @@ import { CustomerProfilePostsComponent } from './customer-profile-posts/customer
   imports: [
     CommonModule,
     RouterModule, 
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    SharedModule
   ],
   exports: [
     CustomerListComponent

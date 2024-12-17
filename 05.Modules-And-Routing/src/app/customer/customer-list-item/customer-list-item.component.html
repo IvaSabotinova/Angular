@@ -1,4 +1,10 @@
+<!-- <div>
+    {{date | date: 'fullDate'}}
+</div>
+
+<div> {{ item | myJson }}</div> -->
+
 <p>
-    {{item.name}}
+    <span class="customer-name" (click)="expandOrShrink()"> {{item.name | shorten: limit }}</span>   
     <a [routerLink]="['/customer', item.id]">See Profile</a>
 </p>
